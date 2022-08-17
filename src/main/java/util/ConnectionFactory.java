@@ -1,0 +1,41 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package util;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+
+/**
+ *
+ * @author rafae
+ */
+public class ConnectionFactory {
+    
+    public static final String DRIVER = "com.mysql.jdbc.Driver";
+    public static final String URL = "jdbc:mysql://localhost:3306/todoapp";
+    public static final String USER = "root";
+    public static final String PASSWORD = "";
+    
+    public static Connection getConnection() {
+        try {
+            Class.forName(DRIVER);
+            return DriverManager.getConnection(URL, USER, PASSWORD);
+        } catch (Exception err){
+            throw new RuntimeException("Fail connection with database", err);
+        }
+    }
+    
+    public static void closeConnection(Connection connection){
+        try {
+            if(connection != null){
+                connection.close();
+            }
+        }catch(Exception err){
+            throw new RuntimeException("Error in close connection with database", err);
+        }
+    }
+    
+    
+}
