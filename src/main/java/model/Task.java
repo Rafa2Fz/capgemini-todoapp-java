@@ -12,10 +12,12 @@ import java.util.Date;
  */
 public class Task {
     int id;
-    String name;
+   private String name;
     String description;
     boolean completed;
     String note;
+    int projectId;
+    
     Date createdAt;
     Date updatedAt;
     
@@ -26,7 +28,8 @@ public class Task {
     boolean completed,
     String note,
     Date createdAt,
-    Date updatedAt
+    Date updatedAt,
+    int projectId
    ){
         this.id = id;
         this.name = name;
@@ -35,8 +38,77 @@ public class Task {
         this.note = note;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.projectId = projectId;
+    }
+    
+    public Task () {
+        this.createdAt = new Date();
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public boolean isCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public int getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(int projectId) {
+        this.projectId = projectId;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+    
     @Override
     public String toString() {
         return "Task{" + "id=" + id + ", name=" + name + ", description=" + description + ", completed=" + completed + ", note=" + note + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + '}';
