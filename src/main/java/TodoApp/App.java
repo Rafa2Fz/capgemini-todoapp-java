@@ -3,13 +3,31 @@
  */
 package TodoApp;
 
+import controller.ProjectController;
 import java.sql.Connection;
+import java.sql.SQLException;
+
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.Project;
 import util.ConnectionFactory;
 
 public class App {
 
     public static void main(String[] args) {
-       
-
+        ProjectController projectController = new ProjectController();
+        
+        Project project = new Project();
+        
+        project.setName("House");
+        project.setDescription("Daily tasks of my house");
+        project.setUpdatedAt(new Date());
+        
+        try {
+            projectController.save(project);
+        } catch (SQLException ex) {
+            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

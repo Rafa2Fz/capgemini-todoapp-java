@@ -23,8 +23,9 @@ import util.ConnectionFactory;
 public class ProjectController {
     
     public void save(Project project) throws SQLException {
-        String sql = "INSERT INTO projects (name, description, createdAt, updatedAt) VALUES ("
-                + "?,?,?,?";
+        String sql = "INSERT INTO projects"
+                + "(name, description, createdAt, updatedAt) "
+                + "VALUES (? ,? ,? ,?)";
         
         Connection conn = null;
         PreparedStatement statement = null;
@@ -41,7 +42,7 @@ public class ProjectController {
             statement.execute();
             
         }catch(SQLException err) {
-            throw new SQLException("Error during save project");
+            throw new SQLException("Error during save project", err);
         }finally {
             ConnectionFactory.closeConnection(conn, statement);
         }
@@ -63,7 +64,7 @@ public class ProjectController {
             statement.execute();
             
         } catch(SQLException err) {
-            throw new SQLException("Error during project delete");
+            throw new SQLException("Error during project delete", err);
         }finally {
                ConnectionFactory.closeConnection(conn, statement);
         }
@@ -88,7 +89,7 @@ public class ProjectController {
             statement.setDate(3, new Date(project.getCreatedAt().getTime()));
             statement.setDate(3, new Date(project.getUpdatedAt().getTime()));
         } catch(SQLException err) {
-            throw new SQLException("Error during project update");
+            throw new SQLException("Error during project update", err);
             
         }finally {
             ConnectionFactory.closeConnection(conn, statement);
@@ -122,7 +123,7 @@ public class ProjectController {
                projects.add(project);
            }
         } catch (SQLException err) {
-            throw new SQLException("Error during get all projects");
+            throw new SQLException("Error during get all projects", err);
         } finally {
             ConnectionFactory.closeConnection(conn, statement, resultSet);
         }

@@ -48,7 +48,7 @@ public class TaskController {
             statement.execute();
 
         } catch (SQLException err) {
-            throw new SQLException("Error during save task");
+            throw new SQLException("Error during save task", err);
         } finally {
             ConnectionFactory.closeConnection(conn, statement);
         }
@@ -69,7 +69,7 @@ public class TaskController {
             statement.execute();
 
         } catch (SQLException err) {
-            throw new SQLException("Error during delete task");
+            throw new SQLException("Error during delete task", err);
         } finally {
             ConnectionFactory.closeConnection(conn, statement);
         }
@@ -106,7 +106,7 @@ public class TaskController {
             statement.execute();
 
         } catch (SQLException err) {
-            throw new SQLException("Fail during update task");
+            throw new SQLException("Fail during update task", err);
         } finally {
 
             ConnectionFactory.closeConnection(conn, statement);
@@ -146,7 +146,7 @@ public class TaskController {
                 tasks.add(task);
             }
         } catch (SQLException err) {
-            throw new SQLException("Fail during get tasks");
+            throw new SQLException("Fail during get tasks", err);
         } finally {
             ConnectionFactory.closeConnection(conn, statement, resultSet);
         }
