@@ -25,7 +25,7 @@ public class ProjectController {
     public void save(Project project) throws SQLException {
         String sql = "INSERT INTO projects"
                 + "(name, description, createdAt, updatedAt) "
-                + "VALUES (? ,? ,? ,?)";
+                + "VALUES (?,?,?,?)";
         
         Connection conn = null;
         PreparedStatement statement = null;
@@ -72,10 +72,11 @@ public class ProjectController {
     
     public void update(Project project) throws SQLException{
         String sql = "UPDATE projects SET "
-                + "name = ? ,"
-                + "description = ? ,"
-                + "createdAt = ? ,"
-                + "updatedAt = ? ,";
+                + "name = ?,"
+                + "description = ?,"
+                + "createdAt = ?,"
+                + "updatedAt = ?"
+                + "WHERE id = ?";
         
         Connection conn = null;
         PreparedStatement statement = null;
@@ -87,7 +88,10 @@ public class ProjectController {
             statement.setString(1, project.getName());
             statement.setString(2, project.getDescription());
             statement.setDate(3, new Date(project.getCreatedAt().getTime()));
-            statement.setDate(3, new Date(project.getUpdatedAt().getTime()));
+            statement.setDate(4, new Date(project.getUpdatedAt().getTime()));
+            statement.setInt(5, project.getId());
+            
+            statement.execute();
         } catch(SQLException err) {
             throw new SQLException("Error during project update", err);
             
@@ -115,6 +119,7 @@ public class ProjectController {
            
            while (resultSet.next()){
                Project project = new Project();
+               project.setId(resultSet.getInt("id"));
                project.setName(resultSet.getString("name"));
                project.setDescription(resultSet.getString("description"));
                project.setCreatedAt(resultSet.getDate("createdAt"));
