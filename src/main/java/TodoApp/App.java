@@ -42,16 +42,18 @@ public class App {
         task.setNote("Dont' add too much salt to the food");
         task.setProjectId(2);
         task.setUpdatedAt(new Date());
+        task.setDeadline(new Date());
 
         task2.setName("Wash the house");
         task2.setDescription("Full house cleaning");
         task2.setCompleted(true);
         task2.setNote("Clean the bathroom!");
         task2.setProjectId(2);
+        task2.setDeadline(new Date());
         task2.setUpdatedAt(new Date());
 
         try {
-//      Save Projects;
+//      Save Projects;;
             projectController.save(project);
             projectController.save(project2);
 

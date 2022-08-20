@@ -28,8 +28,9 @@ public class TaskController {
                 + "note,"
                 + "createdAt,"
                 + "updatedAt, "
-                + "projectId"
-                + ") VALUES(?,?,?,?,?,?,?)";
+                + "projectId,"
+                + "deadline"
+                + ") VALUES(?,?,?,?,?,?,?,?)";
 
         Connection conn = null;
         PreparedStatement statement = null;
@@ -45,6 +46,7 @@ public class TaskController {
             statement.setDate(5, new Date(task.getCreatedAt().getTime()));
             statement.setDate(6, new Date(task.getUpdatedAt().getTime()));
             statement.setInt(7, task.getProjectId());
+            statement.setDate(8, new Date(task.getDeadline().getTime()));
             statement.execute();
 
         } catch (SQLException err) {
@@ -84,7 +86,8 @@ public class TaskController {
                 + "note = ?,"
                 + "createdAt = ?,"
                 + "updatedAt = ?, "
-                + "projectId = ? "
+                + "projectId = ?, "
+                + "deadline = ?"
                 + "WHERE id = ?";
 
         Connection conn = null;
@@ -101,7 +104,9 @@ public class TaskController {
             statement.setDate(5, new Date(task.getCreatedAt().getTime()));
             statement.setDate(6, new Date(task.getUpdatedAt().getTime()));
             statement.setInt(7, task.getProjectId());
-            statement.setInt(8, task.getId());
+            statement.setDate(8, new Date(task.getDeadline().getTime()));
+            statement.setInt(9, task.getId());
+            
 
             statement.execute();
 
@@ -142,6 +147,7 @@ public class TaskController {
                 task.setCreatedAt(resultSet.getDate("createdAt"));
                 task.setUpdatedAt(resultSet.getDate("updatedAt"));
                 task.setProjectId(resultSet.getInt("projectId"));
+                task.setDeadline(resultSet.getDate("deadline"));
 
                 tasks.add(task);
             }

@@ -311,6 +311,9 @@
               <Image iconType="3" name="/assets/plus.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelTaskSubTitleMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

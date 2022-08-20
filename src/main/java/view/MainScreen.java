@@ -167,6 +167,11 @@ public class MainScreen extends javax.swing.JFrame {
         jLabelTasksTitle.setText("Tasks");
 
         jLabelTaskSubTitle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/plus.png"))); // NOI18N
+        jLabelTaskSubTitle.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelTaskSubTitleMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelTasksLayout = new javax.swing.GroupLayout(jPanelTasks);
         jPanelTasks.setLayout(jPanelTasksLayout);
@@ -307,8 +312,16 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void jLabelProjectsIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelProjectsIconMouseClicked
        ProjectDialogScreen projectDialogScreen = new ProjectDialogScreen(this, rootPaneCheckingEnabled);
+       
        projectDialogScreen.setVisible(true);
     }//GEN-LAST:event_jLabelProjectsIconMouseClicked
+
+    private void jLabelTaskSubTitleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelTaskSubTitleMouseClicked
+        // TODO add your handling code here:
+        TaskDialogScreen taskDialogScreen = new TaskDialogScreen(this, rootPaneCheckingEnabled);
+        
+        taskDialogScreen.setVisible(true);
+    }//GEN-LAST:event_jLabelTaskSubTitleMouseClicked
 
     /**
      * @param args the command line arguments
