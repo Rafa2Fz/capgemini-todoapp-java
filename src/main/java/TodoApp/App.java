@@ -18,6 +18,7 @@ import util.ConnectionFactory;
 public class App {
 
     public static void main(String[] args) {
+/*
         ProjectController projectController = new ProjectController();
         TaskController taskController = new TaskController();
 
@@ -79,9 +80,9 @@ public class App {
 
 //      Delete Task
             taskController.deleteById(task.getId());
-
         } catch (SQLException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }
+*/
     }
 }

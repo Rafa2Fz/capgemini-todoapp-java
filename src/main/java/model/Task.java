@@ -12,12 +12,11 @@ import java.util.Date;
  */
 public class Task {
     int id;
-   private String name;
+    private String name;
     String description;
     boolean completed;
     String note;
     int projectId;
-    
     Date createdAt;
     Date updatedAt;
     
