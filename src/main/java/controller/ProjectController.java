@@ -102,9 +102,9 @@ public class ProjectController {
     
     }
     
-    public List<Project> getAllProjects(int id) throws SQLException {
+    public List<Project> getAllProjects() throws SQLException {
         
-        String sql = "SELECT * FROM projects WHERE ID = ?";
+        String sql = "SELECT * FROM projects";
         Connection conn = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -113,7 +113,6 @@ public class ProjectController {
         try {
             conn = ConnectionFactory.getConnection();
             statement = conn.prepareStatement(sql);
-            statement.setInt(1, id);
             
            resultSet = statement.executeQuery();
            

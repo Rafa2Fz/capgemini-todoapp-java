@@ -78,7 +78,7 @@ public class App {
             taskController.update(task);
 
 //      Get all tasks by Project Id
-            System.out.println(taskController.getAllTasks(2));
+            System.out.println(taskController.getAllTasks());
 
 //      Delete Task
             taskController.deleteById(task.getId());
