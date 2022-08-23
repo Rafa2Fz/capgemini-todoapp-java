@@ -165,9 +165,7 @@ public class ProjectDialogScreen extends javax.swing.JDialog {
         } catch (Exception err) {
             JOptionPane.showMessageDialog(rootPane, err.getMessage());
         }
-        
-        
-        
+    
         this.dispose();
         
     }//GEN-LAST:event_jLabelToolBarSaveMouseClicked
