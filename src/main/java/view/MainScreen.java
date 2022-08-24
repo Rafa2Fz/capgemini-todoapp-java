@@ -364,6 +364,9 @@ public class MainScreen extends javax.swing.JFrame {
             int columnIndex = jTableTasks.columnAtPoint(evt.getPoint());
             String columnName = jTableTasks.getColumnName(columnIndex);
             Task task;
+            int projectIndex = jListProjects.getSelectedIndex();
+            Project project = (Project) projectsModel.get(projectIndex);
+            
             if (columnName == "Completed") {
                 task = tasksModel.getTasks().get(rowIndex);
                 taskController.update(task);
@@ -372,11 +375,19 @@ public class MainScreen extends javax.swing.JFrame {
                 task = tasksModel.getTasks().get(rowIndex);
                 taskController.deleteById(task.getId());
                 tasksModel.getTasks().remove(task);
-               
-                int projectIndex = jListProjects.getSelectedIndex();
-                Project project = (Project) projectsModel.get(projectIndex);
                 loadTasks(project.getId());
             }
+             if(columnName == "Edit"){
+                task = tasksModel.getTasks().get(rowIndex);
+                TaskDialogScreen taskDialogScreen = new TaskDialogScreen(this, rootPaneCheckingEnabled, task);
+                
+                taskDialogScreen.setProject(project);
+               
+                taskDialogScreen.setVisible(true);
+
+                loadTasks(project.getId());
+            }
+            
         } catch (Exception err) {
             JOptionPane.showMessageDialog(rootPane, err);
         }

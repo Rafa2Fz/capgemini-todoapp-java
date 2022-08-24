@@ -151,6 +151,7 @@ public class ProjectDialogScreen extends javax.swing.JDialog {
 
     private void jLabelToolBarSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelToolBarSaveMouseClicked
         // TODO add your handling code here:
+        if(!jTextFieldProjectName.getText().equals("")){
         Project project = new Project();
         
         project.setName(jTextFieldProjectName.getText());
@@ -164,6 +165,9 @@ public class ProjectDialogScreen extends javax.swing.JDialog {
             
         } catch (Exception err) {
             JOptionPane.showMessageDialog(rootPane, err.getMessage());
+        }
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Project not saved, fill in the fields");
         }
     
         this.dispose();

@@ -5,6 +5,7 @@
 package view;
 
 import controller.TaskController;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
@@ -23,12 +24,25 @@ public class TaskDialogScreen extends javax.swing.JDialog {
     
     TaskController taskController;
     Project project;
+    Task task = null;
+    
     public TaskDialogScreen(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+        this.task = task;
         taskController = new TaskController();
+     
     }
+    
+      public TaskDialogScreen(java.awt.Frame parent, boolean modal, Task task) {
+        super(parent, modal);
+        initComponents();
+        this.task = task;
+        taskController = new TaskController();
+        loadTaskData();
+     
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -200,24 +214,47 @@ public class TaskDialogScreen extends javax.swing.JDialog {
     private void jLabelToolBarSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelToolBarSaveMouseClicked
         // TODO add your handling code here:
 
-        try {
-            Task task = new Task();
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/y");
-            task.setName(jTextFieldTaskName.getText());
-            task.setDescription(jTextAreaTaskDescription.getText());
-            task.setCompleted(false);
-            task.setNote(jTextAreaTaskNote.getText());
-            task.setUpdatedAt(new Date());
-            task.setProjectId(project.getId());
-            Date deadline = null;
-            deadline = dateFormat.parse(jFormattedTextFieldTaskDeadline.getText());
-            task.setDeadline(deadline);
-            
-            taskController.save(task);
-            JOptionPane.showMessageDialog(rootPane, "Task created successfully");
-            
-        } catch (Exception err) {
-        JOptionPane.showMessageDialog(rootPane, err.getMessage());
+        if (this.task != null) {
+             try {
+               
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/y");
+                task.setName(jTextFieldTaskName.getText());
+                task.setDescription(jTextAreaTaskDescription.getText());
+                task.setCompleted(false);
+                task.setNote(jTextAreaTaskNote.getText());
+                task.setUpdatedAt(new Date());
+                task.setProjectId(project.getId());
+                Date deadline = null;
+                deadline = dateFormat.parse(jFormattedTextFieldTaskDeadline.getText());
+                task.setDeadline(deadline);
+
+                taskController.update(task);
+                JOptionPane.showMessageDialog(rootPane, "Task updated successfully");
+
+            } catch (Exception err) {
+                JOptionPane.showMessageDialog(rootPane, err.getMessage());
+            }
+
+        } else {
+            try {
+                task = new Task();
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/y");
+                task.setName(jTextFieldTaskName.getText());
+                task.setDescription(jTextAreaTaskDescription.getText());
+                task.setCompleted(false);
+                task.setNote(jTextAreaTaskNote.getText());
+                task.setUpdatedAt(new Date());
+                task.setProjectId(project.getId());
+                Date deadline = null;
+                deadline = dateFormat.parse(jFormattedTextFieldTaskDeadline.getText());
+                task.setDeadline(deadline);
+
+                taskController.save(task);
+                JOptionPane.showMessageDialog(rootPane, "Task created successfully");
+
+            } catch (Exception err) {
+                JOptionPane.showMessageDialog(rootPane, err.getMessage());
+            }
         }
         this.dispose();
 
@@ -288,5 +325,24 @@ public class TaskDialogScreen extends javax.swing.JDialog {
 
     public void setProject(Project project){
         this.project = project;
+    }
+
+    public Task getTask() {
+        return task;
+    }
+
+    public void setTask(Task task) {
+        this.task = task;
+    }
+   
+    public void loadTaskData() {
+        if(this.task != null){
+        DateFormat formDate = new SimpleDateFormat("dd/MM/y");
+        jTextFieldTaskName.setText(task.getName());
+        jTextAreaTaskDescription.setText(task.getDescription());
+        jTextAreaTaskNote.setText(task.getNote());
+        jFormattedTextFieldTaskDeadline.setText(formDate.format(task.getDeadline()));
+        }
+        
     }
 }
